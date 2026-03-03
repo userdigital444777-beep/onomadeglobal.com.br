@@ -230,5 +230,71 @@
     <a style="color: #767676;" href="/termos-e-condicoes/" title="Termos e Condições">Termos e Condições</a>
   </footer>
 
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Seleciona somente links que possuem ARTICLE dentro
+  const posts = document.querySelectorAll("main > a:has(article)");
+
+  const postsPerLoad = 7;
+  let visible = postsPerLoad;
+
+  // Oculta posts extras
+  posts.forEach((post, index) => {
+    if (index >= postsPerLoad) {
+      post.style.display = "none";
+    }
+  });
+
+  // Se tiver poucos artigos, não cria botão
+  if (posts.length <= postsPerLoad) return;
+
+  // ===== Criar botão =====
+  const loadBtn = document.createElement("button");
+  loadBtn.id = "loadMorePosts";
+  loadBtn.textContent = "Carregar mais artigos";
+
+  // Estilo alinhado ao seu site
+  loadBtn.style.display = "block";
+  loadBtn.style.margin = "40px auto";
+  loadBtn.style.padding = "14px 26px";
+  loadBtn.style.background = "#0a3cff";
+  loadBtn.style.color = "#fff";
+  loadBtn.style.border = "none";
+  loadBtn.style.borderRadius = "10px";
+  loadBtn.style.fontSize = "16px";
+  loadBtn.style.cursor = "pointer";
+  loadBtn.style.transition = "0.25s ease";
+  loadBtn.style.boxShadow = "0 8px 20px rgba(0,0,0,.08)";
+
+  loadBtn.onmouseenter = () => loadBtn.style.opacity = "0.85";
+  loadBtn.onmouseleave = () => loadBtn.style.opacity = "1";
+
+  // Inserir botão acima do footer
+  const footer = document.querySelector("footer");
+  footer.parentNode.insertBefore(loadBtn, footer);
+
+  // ===== Clique =====
+  loadBtn.addEventListener("click", function () {
+
+    const next = visible + postsPerLoad;
+
+    posts.forEach((post, index) => {
+      if (index < next) {
+        post.style.display = "block";
+      }
+    });
+
+    visible = next;
+
+    // Remove botão quando acabar
+    if (visible >= posts.length) {
+      loadBtn.remove();
+    }
+  });
+
+});
+</script>
+
 </body>
 </html>
