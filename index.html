@@ -184,6 +184,84 @@ href="https://onomadeglobal.com.br/rss.xml" />
       "name": "Jean Soleto"
     }
   }
+
+	  /* ================= MENU ================= */
+
+.main-menu {
+  background: #ffffff;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.menu-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0.7rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-links {
+  list-style: none;
+  display: flex;
+  gap: 28px;
+}
+
+.menu-links li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.menu-links li a:hover {
+  color: #1082be;
+}
+
+/* BOTÃO MOBILE */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .menu-container {
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu-links {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 0;
+    display: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,.08);
+  }
+
+  .menu-links.active {
+    display: flex;
+  }
+}
   </script>
 
 </head>
@@ -191,7 +269,27 @@ href="https://onomadeglobal.com.br/rss.xml" />
 <body>
 
   <header>
-     <img src="images/logo2.png" alt="O Nômade Global - Jean Soleto" title="O Nômade Global - Jean Soleto">
+     <img src="images/logo2.png" alt="O Nômade Global - Jean Soleto" title="O Nômade Global - Jean Soleto"></br>
+	  <!-- MENU PRINCIPAL -->
+<nav class="main-menu">
+
+  <div class="menu-container">
+
+    <button class="menu-toggle" aria-label="Abrir Menu">
+      ☰
+    </button>
+
+    <ul class="menu-links">
+      <li><a href="/">Início</a></li>
+      <li><a href="/marketing/">Marketing</a></li>
+      <li><a href="/maquininhas/">Maquininhas</a></li>
+      <li><a href="/emagrecimento/">Emagrecimento</a></li>
+      <li><a href="/contato/">Contato</a></li>
+    </ul>
+
+  </div>
+
+</nav>
   </header>
 
   <nav class="breadcrumb" aria-label="breadcrumb">
@@ -417,6 +515,19 @@ document.addEventListener("DOMContentLoaded", function () {
     if (visible >= posts.length) {
       loadBtn.remove();
     }
+  });
+
+});
+</script>
+
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const toggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector(".menu-links");
+
+  toggle.addEventListener("click", function () {
+    menu.classList.toggle("active");
   });
 
 });
